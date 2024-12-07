@@ -31,3 +31,5 @@ Exception in thread "AWT-EventQueue-0" java.lang.UnsupportedOperationException: 
 ```
 
 If I run the Maven project "normally" without the Assembly Plugin, everything works perfectly, and I can see the icon.
+
+![](workswell.jpg)
