@@ -38,3 +38,41 @@ Thank you in advance for your advice on how to make the system work even with th
 
 Bela Roboz
 info@webfocus.hu
+
+## UPDATE
+
+In this Git version, the creation of the fat JAR now works correctly in conjunction with the Maven Assembly Plugin.
+
+![](ok_with_fat_jar.jpg)
+
+If I'm not mistaken, this plugin played a role in the solution in the end.
+
+```
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-shade-plugin</artifactId>
+	<version>3.6.0</version>
+	<configuration>
+		<relocations>
+			<relocation>
+				<pattern>org.kordamp.ikonli</pattern>
+				<shadedPattern>shaded.org.kordamp.ikonli</shadedPattern>
+			</relocation>
+		</relocations>
+		<transformers>
+			<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+			<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+				<mainClass>hu.wfs.mavenproject6.NewJFrame</mainClass>
+			</transformer>
+		</transformers>
+	</configuration>
+	<executions>
+		<execution>
+			<phase>package</phase>
+			<goals>
+				<goal>shade</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>   
+```
